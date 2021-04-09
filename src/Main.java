@@ -1,16 +1,34 @@
 // 2021 - 4 - 08 / 자바 연습용.
+// 웹페이지 데이터 실시간 크롤링 및 배열이용한 랜덤 숫자 생성. 쓰레드활용
+// UI 구현 - 자바 swing.awt -구현중 21/04/09
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import java.awt.*;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.*;
+import javax.swing.*;
+
 
 public class Main {
     static String[] tar = new  String[5];      //645당첨금액 저장 배열
     static String[] win_ball = new  String[7];  //645당첨번호 저장 배열        // 720은 개별 매서드에 선언
 
+
     static void showmenu(){
+        /*JFrame frame = new JFrame();
+        JPanel panel = new JPanel();
+
+        panel.add(new );
+        frame.add(panel);
+        frame.setVisible(true);
+        frame.setPreferredSize(new Dimension(800,600));
+        frame.setSize(800,600);
+        frame.setLocationRelativeTo(null);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); */
+
         int type;
         System.out.println("------------로또 정보조회 & 번호생성기------------");
         System.out.println("원하는 복권형태 선택.");
@@ -51,6 +69,7 @@ public class Main {
         if(input == 1){
             System.out.println("로또6/45 랜덤번호");
             Lotto645();
+            System.out.println("\n");
             System.out.println("잠시후 메인메뉴로 돌아갑니다.");
             try {
                 Thread.sleep(2000);                       //delay 걸기
@@ -76,9 +95,9 @@ public class Main {
         int input = scanner.nextInt();
 
         if(input == 1){
-            System.out.println("연금복권720 + 랜덤번호");
+            System.out.println("연금복권720+ 랜덤번호");
             Lotto720();
-
+            System.out.println("\n");
             System.out.println("잠시후 메인메뉴로 돌아갑니다.");
             try {
                 Thread.sleep(2000);                       //delay 걸기
@@ -121,7 +140,6 @@ public class Main {
     }
 
     static void Lotto720(){                    //720 랜덤번호생성기능
-        Crawling720();
         int Group;  //오류검사용 변수
         for(;;) {
             System.out.println("연금복권 720+ 조 선택 :"); //조 선택
@@ -143,7 +161,6 @@ public class Main {
         System.out.printf("조 번호 : [%d] , " , Group); //출력부
         for (int i = 0 ; i < 6 ; i++)
         System.out.printf("[%d]" , ball[i]);
-
     }
 
     static void Crawling645(){                      // 로또 645 당첨번호 크롤링 메서드
@@ -258,13 +275,17 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        showmenu();
+       // JFrame frame = new JFrame();
+       // JPanel panel = new JPanel();
 
+
+        showmenu();        //시작
+        //끝
     }
 }
 
        /* 인터넷 연결확인이 되지않거나 웹페이지 점검등으로 응답이 불가능할떄 예외로발생하는 에러코드.
-          이에 대한 예외처리를 각 크롤링 메서드 초반부 예외처리에 구현완료 */
+          이에 대한 예외처리를 각 크롤링 메서드 초반부 예외처리에 구현완료 21.04.09 */
         /*  java.net.UnknownHostException: dhlottery.co.kr
         at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:196)
         at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:162)
